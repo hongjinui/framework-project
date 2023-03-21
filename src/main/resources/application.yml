@@ -4,9 +4,10 @@ server:
   port: 8080
 
 spring:
-  #    hikari:
+  datasource:
+    hikari:
+      maximum-pool-size: 3
   #      connection-timeout: 30000
-  #      maximum-pool-size: 3
   #      max-lifetime: 580000
   #      pool-name: Hikari
   #      read-only: false
@@ -22,13 +23,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test # 테스트용 인메모리 DB
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:test # 테스트용 인메모리 DB
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy # sql log
+    url: jdbc:log4jdbc:h2:mem:test # 테스트용 인메모리 DB
     username: sa
     password:
   h2:
@@ -40,5 +43,4 @@ spring:
 #spring:
 #  config:
 #    activate:
-
 #      on-profile: dev
