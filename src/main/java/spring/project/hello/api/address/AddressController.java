@@ -24,9 +24,7 @@ public class AddressController {
      */
     @GetMapping("{id}")
     public ResponseEntity<?> getAddress(HttpServletRequest httpServletRequest, @PathVariable("id") Long id) {
-
         ApiResponseVO responseData = addressService.getAddress(id);
-
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
@@ -37,9 +35,7 @@ public class AddressController {
      */
     @GetMapping("list")
     public ResponseEntity<?> getAddressList(HttpServletRequest httpServletRequest) {
-
         ApiResponseVO responseData = addressService.getAddressList();
-
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
@@ -51,9 +47,7 @@ public class AddressController {
      */
     @PostMapping("address")
     public ResponseEntity<?> insertAddress(HttpServletRequest httpServletRequest, @RequestBody AddressDTO addressDTO) {
-
         ApiResponseVO responseData = addressService.insertAddress(addressDTO);
-
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
@@ -65,9 +59,7 @@ public class AddressController {
      */
     @PutMapping("address")
     public ResponseEntity<?> updateAddress(HttpServletRequest httpServletRequest, @RequestBody AddressDTO addressDTO) {
-
         ApiResponseVO responseData = addressService.updateAddress(addressDTO);
-
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
@@ -79,9 +71,7 @@ public class AddressController {
      */
     @PutMapping("use-yn")
     public ResponseEntity<?> updateUseYn(HttpServletRequest httpServletRequest, @RequestBody AddressDTO addressDTO) {
-
         ApiResponseVO responseData = addressService.updateUseYn(addressDTO);
-
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
@@ -93,9 +83,7 @@ public class AddressController {
      */
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteAddress(HttpServletRequest httpServletRequest, @PathVariable("id") Long id) {
-
         ApiResponseVO responseData = addressService.deleteAddress(id);
-
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 

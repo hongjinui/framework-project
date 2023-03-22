@@ -13,6 +13,7 @@ import spring.project.hello.common.ResponseData;
 import spring.project.hello.domain.entity.Address;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -25,19 +26,16 @@ public class AddressService {
     public ApiResponseVO getAddress(Long id) {
 
         ApiResponseVO responseData = null;
-
         try {
 
             Optional<Address> addressOptional = addressRepository.findById(id);
-            if (addressOptional.isEmpty()) throw new Exception(); // null check
+            if (addressOptional.isEmpty()) throw new NoSuchElementException(); // null check
 
-            AddressVO addressVO = AddressVO.builder() // entity to dto
-                    .address(addressOptional.get())
-                    .build();
+            AddressVO addressVO = addressEntity2vo(addressOptional.get()); // entity to vo
 
             responseData = ResponseData.apiResponse(HttpStatus.OK, addressVO, CustomApiCode.DATA_OK);
 
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
             responseData = ResponseData.apiResponse(HttpStatus.INTERNAL_SERVER_ERROR, null, CustomApiCode.ERROR);
         }
         return responseData;
@@ -64,14 +62,15 @@ public class AddressService {
 
     @Transactional
     public ApiResponseVO insertAddress(AddressDTO addressDTO) {
+
         ApiResponseVO responseData = null;
         try {
 
+            System.out.println(addressDTO.getAddress());
+
             addressDTO.setUseYn('Y');
 
-            Address addressEntity = Address.builder() // dto to entity
-                    .addressDTO(addressDTO)
-                    .build();
+            Address addressEntity = dto2addressEntity(addressDTO); // dto to entity
 
             addressRepository.save(addressEntity);
 
@@ -85,12 +84,13 @@ public class AddressService {
 
     @Transactional
     public ApiResponseVO updateAddress(AddressDTO addressDTO) {
+
         ApiResponseVO responseData = null;
         try {
 
             // entity 조회 후 값 변경
             Optional<Address> addressOptional = addressRepository.findById(addressDTO.getId());
-            if (addressOptional.isEmpty()) throw new Exception(); // null check
+            if (addressOptional.isEmpty()) throw new NoSuchElementException(); // null check
             Address addressEntity = addressOptional.get();
 
             addressEntity.updateAddress(addressDTO.getAddress());
@@ -100,7 +100,7 @@ public class AddressService {
 
             responseData = ResponseData.apiResponse(HttpStatus.OK, null, CustomApiCode.DATA_OK);
 
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
             responseData = ResponseData.apiResponse(HttpStatus.INTERNAL_SERVER_ERROR, null, CustomApiCode.ERROR);
         }
         return responseData;
@@ -113,18 +113,17 @@ public class AddressService {
         try {
 
             Optional<Address> addressOptional = addressRepository.findById(addressDTO.getId());
-            if (addressOptional.isEmpty()) throw new Exception(); // null check
+            if (addressOptional.isEmpty()) throw new NoSuchElementException(); // null check
             Address addressEntity = addressOptional.get();
 
             addressEntity.updateUseYn(addressDTO.getUseYn());
 
             responseData = ResponseData.apiResponse(HttpStatus.OK, null, CustomApiCode.DATA_OK);
 
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
             responseData = ResponseData.apiResponse(HttpStatus.INTERNAL_SERVER_ERROR, null, CustomApiCode.ERROR);
         }
         return responseData;
-
     }
 
     @Transactional
@@ -134,15 +133,25 @@ public class AddressService {
         try {
 
             addressRepository.deleteById(id);
-
             responseData = ResponseData.apiResponse(HttpStatus.OK, null, CustomApiCode.DATA_OK);
 
         } catch (Exception e) {
             responseData = ResponseData.apiResponse(HttpStatus.INTERNAL_SERVER_ERROR, null, CustomApiCode.ERROR);
         }
         return responseData;
-
     }
 
+    private AddressVO addressEntity2vo(Address entity) {
+//        AddressVO addressVO = AddressVO.builder()
+//                .address(entity)
+//                .build();
+        return new AddressVO(entity);
+    }
 
+    private Address dto2addressEntity(AddressDTO addressDTO) {
+//        Address addressEntity = Address.builder()
+//                .addressDTO(addressDTO)
+//                .build();
+        return new Address(addressDTO);
+    }
 }
