@@ -2,6 +2,7 @@ package spring.project.hello.api.address.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import spring.project.hello.api.address.dto.AddressDTO;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AddressService {
 
     private final AddressRepository addressRepository;
@@ -36,6 +38,7 @@ public class AddressService {
             responseData = ResponseData.apiResponse(HttpStatus.OK, addressVO, CustomApiCode.DATA_OK);
 
         } catch (NoSuchElementException e) {
+            log.info("getAddress NoSuchElementException");
             responseData = ResponseData.apiResponse(HttpStatus.INTERNAL_SERVER_ERROR, null, CustomApiCode.ERROR);
         }
         return responseData;
@@ -54,6 +57,7 @@ public class AddressService {
             responseData = ResponseData.apiResponse(HttpStatus.OK, list, CustomApiCode.DATA_OK);
 
         } catch (Exception e) {
+            log.info("getAddressList Exception");
             responseData = ResponseData.apiResponse(HttpStatus.INTERNAL_SERVER_ERROR, null, CustomApiCode.ERROR);
         }
         return responseData;
@@ -77,6 +81,7 @@ public class AddressService {
             responseData = ResponseData.apiResponse(HttpStatus.OK, null, CustomApiCode.DATA_OK);
 
         } catch (Exception e) {
+            log.info("insertAddress Exception");
             responseData = ResponseData.apiResponse(HttpStatus.INTERNAL_SERVER_ERROR, null, CustomApiCode.ERROR);
         }
         return responseData;
@@ -101,6 +106,7 @@ public class AddressService {
             responseData = ResponseData.apiResponse(HttpStatus.OK, null, CustomApiCode.DATA_OK);
 
         } catch (NoSuchElementException e) {
+            log.info("updateAddress NoSuchElementException");
             responseData = ResponseData.apiResponse(HttpStatus.INTERNAL_SERVER_ERROR, null, CustomApiCode.ERROR);
         }
         return responseData;
@@ -121,6 +127,7 @@ public class AddressService {
             responseData = ResponseData.apiResponse(HttpStatus.OK, null, CustomApiCode.DATA_OK);
 
         } catch (NoSuchElementException e) {
+            log.info("updateUseYn NoSuchElementException");
             responseData = ResponseData.apiResponse(HttpStatus.INTERNAL_SERVER_ERROR, null, CustomApiCode.ERROR);
         }
         return responseData;
@@ -136,6 +143,7 @@ public class AddressService {
             responseData = ResponseData.apiResponse(HttpStatus.OK, null, CustomApiCode.DATA_OK);
 
         } catch (Exception e) {
+            log.info("deleteAddress Exception");
             responseData = ResponseData.apiResponse(HttpStatus.INTERNAL_SERVER_ERROR, null, CustomApiCode.ERROR);
         }
         return responseData;
