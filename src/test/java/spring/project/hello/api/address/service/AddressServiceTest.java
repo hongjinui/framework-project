@@ -29,11 +29,7 @@ class AddressServiceTest {
     @DisplayName("주소 조회")
     @Transactional
     void find() {
-        AddressDTO addressDTO = new AddressDTO();
-        addressDTO.setAddress("address");
-        addressDTO.setName("name");
-        addressDTO.setPhone("phone");
-        addressDTO.setEmail("email");
+        AddressDTO addressDTO = getAddressDTO();
 
         Address address = Address.builder().addressDTO(addressDTO).build();
         when(addressRepository.findById(1L)).thenReturn(Optional.of(address)); // findById mock
@@ -48,13 +44,6 @@ class AddressServiceTest {
     @DisplayName("주소 조회 에러")
     @Transactional
     void notFound() {
-        AddressDTO addressDTO = new AddressDTO();
-        addressDTO.setAddress("address");
-        addressDTO.setName("name");
-        addressDTO.setPhone("phone");
-        addressDTO.setEmail("email");
-
-//        Address address = Address.builder().addressDTO(addressDTO).build();
         when(addressRepository.findById(1L)).thenReturn(Optional.empty()); // findById mock
 
         ApiResponseVO apiResponseVO = addressService.getAddress(1L);
@@ -67,15 +56,20 @@ class AddressServiceTest {
     @DisplayName("주소 저장")
     @Transactional
     void save() {
-        AddressDTO addressDTOParam = new AddressDTO();
-        addressDTOParam.setAddress("address param");
-        addressDTOParam.setName("name param");
-        addressDTOParam.setPhone("phone param");
-        addressDTOParam.setEmail("email param");
+        AddressDTO addressDTO = getAddressDTO();
 
-        ApiResponseVO apiResponseVO = addressService.insertAddress(addressDTOParam);
+        ApiResponseVO apiResponseVO = addressService.insertAddress(addressDTO);
 
         Assertions.assertThat(apiResponseVO.getStatus()).isEqualTo(200);
+    }
+
+    private AddressDTO getAddressDTO() {
+        AddressDTO addressDTO = new AddressDTO();
+        addressDTO.setAddress("address");
+        addressDTO.setName("name");
+        addressDTO.setPhone("phone");
+        addressDTO.setEmail("email");
+        return addressDTO;
     }
 
 
