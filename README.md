@@ -14,7 +14,7 @@ SpringBoot + JPA를 활용한 CRUD (주소록) 샘플 애플리케이션입니�
 <p>
 
 <p>./build/libs에 생성 된 hello-{version}-SNAPSHOT.jar 파일 실행<br>
-<code>java -jar hello-{version}-SNAPSHOT.jar</code>
+<code>java -jar hello-{version}-SNAPSHOT.jar --spring.profiles.active=local</code>
 <p>
 
 <p>./gradlew test로 생성된 테스트 케이스 결과 확인 html <br>
