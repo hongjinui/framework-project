@@ -2,13 +2,13 @@
 
 SpringBoot + JPA를 활용한 CRUD (주소록) 샘플 애플리케이션입니다.
 
-<h2>1. build</h2>
+<h2>1. build and run</h2>
 <h2>2. urls</h2>
 <h2>3. h2 db console<h2>
 
 ----------------------------------------------------------------------------------------------------------------
 
-<h3> build</h3>
+<h3> build and run</h3>
 <p>프로젝트 루트(hello)로 이동 후 명령어 입력<br>
 <code>./gradlew clean bootJar test</code>
 <p>
