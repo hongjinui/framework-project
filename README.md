@@ -1,4 +1,4 @@
-# framework-project
+# framework project
 
 SpringBoot + JPA를 활용한 CRUD (주소록) 샘플 애플리케이션입니다.
 
