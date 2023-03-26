@@ -29,11 +29,11 @@
     <logger name="jdbc.audit" level="OFF">
 <!--        <appender-ref ref="console"/>-->
     </logger>
-    <logger name="jdbc.resultset" level="info">
-        <appender-ref ref="console"/>
+    <logger name="jdbc.resultset" level="OFF">
+<!--        <appender-ref ref="console"/>-->
     </logger>
-    <logger name="jdbc.resultsettable" level="info">
-        <appender-ref ref="console"/>
+    <logger name="jdbc.resultsettable" level="OFF">
+<!--        <appender-ref ref="console"/>-->
     </logger>
 
     <!-- 로그 레벨 지정 -->
