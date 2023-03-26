@@ -40,7 +40,7 @@ SpringBoot + JPA를 활용한 CRUD (주소록) 샘플 애플리케이션입니�
 <strong>PUT: http://localhost:8080/api/address-book/address - 주소 수정</strong><br>
 파라미터: <code>
 {
-    "id":1,
+    "id":target id,
     "name":"update name",
     "address":"update address",
     "phone":"update phone",
@@ -49,7 +49,7 @@ SpringBoot + JPA를 활용한 CRUD (주소록) 샘플 애플리케이션입니�
 <strong>PUT: http://localhost:8080/api/address-book/use-yn - 주소 사용 여부 수정</strong><br>
 파라미터: <code>
 {
-    "id":1,
+    "id":target id,
     "useYn":"N"
 }</code><br><br>
 <strong>DEL: http://localhost:8080/api/address-book/{id} - 주소 물리적 삭제</strong><br>
