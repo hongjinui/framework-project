@@ -22,7 +22,7 @@ public class AddressController {
      * @param id
      * @return ResponseEntity
      */
-    @GetMapping("{id}")
+    @GetMapping("addresses/{id}")
     public ResponseEntity<?> getAddress(HttpServletRequest httpServletRequest, @PathVariable("id") Long id) {
         ApiResponseVO responseData = addressService.getAddress(id);
         return new ResponseEntity<>(responseData, HttpStatus.OK);
@@ -33,7 +33,7 @@ public class AddressController {
      * @param httpServletRequest
      * @return ResponseEntity
      */
-    @GetMapping("list")
+    @GetMapping("addresses")
     public ResponseEntity<?> getAddressList(HttpServletRequest httpServletRequest) {
         ApiResponseVO responseData = addressService.getAddressList();
         return new ResponseEntity<>(responseData, HttpStatus.OK);
@@ -45,7 +45,7 @@ public class AddressController {
      * @param addressDTO
      * @return ResponseEntity
      */
-    @PostMapping("address")
+    @PostMapping("addresses")
     public ResponseEntity<?> insertAddress(HttpServletRequest httpServletRequest, @RequestBody AddressDTO addressDTO) {
         ApiResponseVO responseData = addressService.insertAddress(addressDTO);
         return new ResponseEntity<>(responseData, HttpStatus.OK);
@@ -57,8 +57,9 @@ public class AddressController {
      * @param addressDTO
      * @return
      */
-    @PutMapping("address")
-    public ResponseEntity<?> updateAddress(HttpServletRequest httpServletRequest, @RequestBody AddressDTO addressDTO) {
+    @PutMapping("addresses/{id}")
+    public ResponseEntity<?> updateAddress(HttpServletRequest httpServletRequest, @PathVariable("id") Long id, @RequestBody AddressDTO addressDTO) {
+        addressDTO.setId(id);
         ApiResponseVO responseData = addressService.updateAddress(addressDTO);
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
@@ -69,7 +70,7 @@ public class AddressController {
      * @param addressDTO
      * @return
      */
-    @PutMapping("use-yn")
+    @PutMapping("addresses/use-yn")
     public ResponseEntity<?> updateUseYn(HttpServletRequest httpServletRequest, @RequestBody AddressDTO addressDTO) {
         ApiResponseVO responseData = addressService.updateUseYn(addressDTO);
         return new ResponseEntity<>(responseData, HttpStatus.OK);
@@ -81,7 +82,7 @@ public class AddressController {
      * @param id
      * @return
      */
-    @DeleteMapping("{id}")
+    @DeleteMapping("addresses/{id}")
     public ResponseEntity<?> deleteAddress(HttpServletRequest httpServletRequest, @PathVariable("id") Long id) {
         ApiResponseVO responseData = addressService.deleteAddress(id);
         return new ResponseEntity<>(responseData, HttpStatus.OK);

@@ -24,7 +24,6 @@ public class AddressService {
 
     private final AddressRepository addressRepository;
 
-    @Transactional
     public ApiResponseVO getAddress(Long id) {
 
         ApiResponseVO responseData = null;
@@ -45,7 +44,6 @@ public class AddressService {
     }
 
 
-    @Transactional
     public ApiResponseVO getAddressList() {
 
         ApiResponseVO responseData = null;
